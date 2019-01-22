@@ -6,14 +6,16 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      name: 'BeersDisplay',
-      props: {
-        msg: String
-      }
+export default {
+  name: 'BeerDisplay',
+  props: {
+    beers: Array
+  },
+  data: function () {
+    return {
     }
   }
+}
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

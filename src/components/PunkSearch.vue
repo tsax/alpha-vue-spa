@@ -27,8 +27,12 @@
     </section>
     <section>
       <b-tabs position="is-centered" size="is-medium" class="block">
-        <b-tab-item label="Searched Beers" ></b-tab-item>
-        <b-tab-item label="Favorites!" ></b-tab-item>
+        <b-tab-item label="Searched Beers" >
+          <BeersDisplay v-bind:beers="this.results" />
+        </b-tab-item>
+        <b-tab-item label="Favorites!" >
+          <BeersDisplay v-bind:beers="this.favorites" />
+        </b-tab-item>
       </b-tabs>
     </section>
   </div>
@@ -36,8 +40,12 @@
 
 <script>
 import BeerAPI from '../BeerAPI'
+import BeersDisplay from './BeersDisplay'
 export default {
   name: 'PunkSearch',
+  components: {
+    BeersDisplay
+  },
   props: {
     msg: String
   },
