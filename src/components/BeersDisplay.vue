@@ -1,7 +1,12 @@
 <template>
-  <div class="beers-display">
-    <section class="is-primary is-bold">
-    </section>
+  <div class="tile is-ancestor">
+    <div v-for="beer in beers" :key="beer.id">
+      <div class="tile is-parent">
+        <div class="tile is-child box">
+          <p class="title">{{ beer.name }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
