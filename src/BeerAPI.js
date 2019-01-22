@@ -1,28 +1,31 @@
-import axios from 'axios'
-
 export default {
-  searchBeers (beerName, abvGt, abvLt) {
-    console.log('HAHAHAHHA')
-    let searchQuery = `beer_name=${beerName}`
+  async searchBeers (beerName, abvGt, abvLt) {
+    let beers = []
+
+    let searchQuery = `beer_name=${encodeURIComponent(beerName)}`
     if (abvGt) {
-      searchQuery += `abv_gt=${abvGt}`
+      searchQuery += `&&abv_gt=${encodeURIComponent(abvGt)}`
     }
     if (abvLt) {
-      searchQuery += `abv_lt=${abvLt}`
+      searchQuery += `&&abv_lt=${encodeURIComponent(abvLt)}`
     }
-    return axios.get('/beers' + searchQuery)
-      .then(response => {
-        return response.data
-      })
+
+    const response = await fetch(`https://api.punkapi.com/v2/beers?` + searchQuery)
+    const json = await response.json()
+    beers = json
+
+    console.log(beers)
+    return beers
   },
 
-  getRandomBeer () {
-    console.log('HAHAHAHHA')
-    let randomBeers = []
-    axios.get('/beers/random')
-      .then(response => {
-        randomBeers.push(response.data[0])
-      })
-    console.log(randomBeers)
+  async getRandomBeer () {
+    let beers = []
+    for (let i = 1; i <= 6; i++) {
+      const response = await fetch(`https://api.punkapi.com/v2/beers/random`)
+      const json = await response.json()
+      beers.push(json[0])
+    }
+
+    return beers
   }
 }

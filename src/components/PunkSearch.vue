@@ -14,11 +14,12 @@
     </section>
     <section>
       <div class="container">
-        <h3 class="title">Search Beers</h3>
+        <br />
         <b-field grouped>
           <b-input v-model="beer_name" placeholder="Search..." expanded></b-input>
           <p class="control">
           <button class="button is-primary" @click="this.searchBeers">Search</button>
+          <span id="search-break"> </span>
           <button class="button is-primary" @click="this.getRandomBeers">Random</button>
           </p>
         </b-field>
@@ -52,9 +53,13 @@ export default {
     }
   },
   methods: {
+    searchBeers: function () {
+      BeerAPI.searchBeers(this.beer_name, this.abv_gt, this.abv_lt)
+        .then(beers => (this.results = beers))
+    },
     getRandomBeers: function () {
-      let randomBeer = BeerAPI.getRandomBeer()
-        .then(result => this.results.push(result))
+      BeerAPI.getRandomBeer()
+        .then(beers => (this.results = beers))
     }
   }
 }
@@ -65,6 +70,9 @@ export default {
 .search {
   margin: 0 auto;
   width: 600px;
+}
+#search-break {
+  margin-left: 5px;
 }
 /*
 h3 {
