@@ -34,6 +34,15 @@
           <BeersDisplay v-bind:beers="this.favorites" />
         </b-tab-item>
       </b-tabs>
+      <b-pagination
+        :total="this.results.length"
+        :current.sync="currentPage"
+        order="is-centered"
+        :size="size"
+        :simple="isSimple"
+        :rounded="isRounded"
+        :per-page="perPage">
+      </b-pagination>
     </section>
   </div>
 </template>
@@ -54,6 +63,7 @@ export default {
       beer_name: '',
       abv_gt: '0',
       abv_lt: '20',
+      currentPage: 1,
       results: [],
       noResults: false,
       searching: false,

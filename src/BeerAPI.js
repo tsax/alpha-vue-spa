@@ -4,11 +4,12 @@ export default {
 
     let searchQuery = `beer_name=${encodeURIComponent(beerName)}`
     if (abvGt) {
-      searchQuery += `&&abv_gt=${encodeURIComponent(abvGt)}`
+      searchQuery += `&abv_gt=${encodeURIComponent(abvGt)}`
     }
     if (abvLt) {
-      searchQuery += `&&abv_lt=${encodeURIComponent(abvLt)}`
+      searchQuery += `&abv_lt=${encodeURIComponent(abvLt)}`
     }
+    searchQuery += `&per_page=5`
 
     const response = await fetch(`https://api.punkapi.com/v2/beers?` + searchQuery)
     const json = await response.json()
