@@ -28,20 +28,17 @@
     <section>
       <b-tabs position="is-centered" size="is-medium" class="block">
         <b-tab-item label="Searched Beers" >
-          <BeersDisplay v-bind:beers="this.results" />
+          <BeersDisplay :onClick="favoriteBeer" v-bind:beers="this.results" />
         </b-tab-item>
         <b-tab-item label="Favorites!" >
-          <BeersDisplay v-bind:beers="this.favorites" />
+          <BeersDisplay :onClick="unfavoriteBeer" v-bind:beers="this.favorites" />
         </b-tab-item>
       </b-tabs>
       <b-pagination
         :total="this.results.length"
         :current.sync="currentPage"
         order="is-centered"
-        :size="size"
-        :simple="isSimple"
-        :rounded="isRounded"
-        :per-page="perPage">
+        :per-page="5">
       </b-pagination>
     </section>
   </div>
@@ -78,6 +75,16 @@ export default {
     getRandomBeers: function () {
       BeerAPI.getRandomBeer()
         .then(beers => (this.results = beers))
+    },
+    favoriteBeer: function (beer) {
+      let index = this.favorites.find(b => b.id === beer.id)
+      if (!index) {
+        this.favorites.push(beer)
+      }
+    },
+    unfavoriteBeer: function (beer) {
+      let index = this.favorites.findIndex(b => b.id === beer.id)
+      this.favorites.splice(index, 1)
     }
   }
 }

@@ -4,8 +4,10 @@
       <div class="tile is-child box">
         <p class="title">{{ beer.name }}</p>
         <figure class="image is-1by3">
-          <img v-bind:src="beer.image_url" style="max-width:100%; object-fit: scale-down;" >
+          <img v-bind:src="beer.image_url" style="height: 50%; object-fit: scale-down;" >
         </figure>
+          <button class="button" @click='onClick(beer)'>Favorite Me!</button>
+          <button class="button" @click='onClick(beer)'>Un-Favorite Me</button>
       </div>
     </div>
   </div>
@@ -15,7 +17,8 @@
 export default {
   name: 'BeerDisplay',
   props: {
-    beers: Array
+    beers: Array,
+    onClick: Function
   },
   data: function () {
     return {
