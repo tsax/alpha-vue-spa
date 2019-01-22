@@ -1,10 +1,11 @@
 <template>
   <div class="tile is-ancestor">
-    <div v-for="beer in beers" :key="beer.id">
-      <div class="tile is-parent">
-        <div class="tile is-child box">
-          <p class="title">{{ beer.name }}</p>
-        </div>
+    <div class="tile is-parent" v-for="beer in beers" :key="beer.id">
+      <div class="tile is-child box">
+        <p class="title">{{ beer.name }}</p>
+        <figure class="image is-1by3">
+          <img v-bind:src="beer.image_url" style="max-width:100%; object-fit: scale-down;" >
+        </figure>
       </div>
     </div>
   </div>
